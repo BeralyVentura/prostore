@@ -9,7 +9,7 @@ const Header = () => {
       <div className="max-w-7xl mx-auto px-4 flex items-center justify-between h-16">
         <Link href="/" className="flex items-center">
           <Image
-            src="logo.svg"
+            src="/logo.svg"
             alt={`${APP_NAME} logo`}
             width={48}
             height={48}
