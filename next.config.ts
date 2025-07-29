@@ -1,10 +1,20 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   eslint: {
-    ignoreDuringBuilds: true, // Ignorar errores de ESLint durante el build
+    ignoreDuringBuilds: true, // Ignora errores de ESLint en producción
   },
   typescript: {
-    ignoreBuildErrors: true, // Ignorar errores de TypeScript durante el build
+    ignoreBuildErrors: true, // Ignora errores de TS en producción
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'utfs.io',
+        port: '',
+        pathname: '/**'
+      }
+    ]
   }
 };
 

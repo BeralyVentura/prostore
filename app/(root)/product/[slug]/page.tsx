@@ -19,36 +19,38 @@ const ProductDetailsPage = async ({ params }: ProductPageProps) => {
   if (!product) notFound();
 
   return (
-    <section>
-      <div className="grid grid-cols-1 md:grid-cols-5">
-        {/* Images Column */}
+    <section className="max-w-7xl mx-auto px-4">
+      {/* Detalles del producto principal */}
+      <div className="grid grid-cols-1 md:grid-cols-5 gap-6 mt-10">
+        {/* Columna de imágenes */}
         <div className="col-span-2">
           <ProductImages images={product.images} />
         </div>
 
-        {/* Details Column */}
-        <div className="col-span-2 p-5">
-          <div className="flex flex-col gap-6">
+        {/* Columna de detalles */}
+        <div className="col-span-2 p-0">
+          <div className="flex flex-col gap-4">
             <p className="text-sm text-muted-foreground">
-              {product.brand} {product.category}
+              {product.brand} • {product.category}
             </p>
 
-            <h1 className="text-2xl font-bold">{product.name}</h1>
+            <h1 className="text-2xl font-bold tracking-tight">{product.name}</h1>
 
-            <p className="text-sm text-muted-foreground">
-              {product.rating.toString()} of {product.numReviews} Reviews
-            </p>
-
-            {/* Precio en verde con decimales elevados */}
-            <div className="flex flex-col sm:flex-row sm:items-center gap-3">
-              <ProductPrice
-                value={Number(product.price)}
-                className="bg-green-100 text-green-700 px-4 py-1 rounded-full"
-              />
+            <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1 text-sm">
+                <span className="text-yellow-500">★</span>
+                <span>{product.rating}</span>
+                <span className="text-muted-foreground">({product.numReviews} reviews)</span>
+              </div>
             </div>
+
+            <ProductPrice
+              value={Number(product.price)}
+              className="text-green-600 font-bold text-xl"
+            />
           </div>
 
-          <div className="mt-10">
+          <div className="mt-6 space-y-2">
             <p className="font-semibold text-base">Description</p>
             <p className="text-sm text-muted-foreground">
               {product.description}
@@ -56,27 +58,22 @@ const ProductDetailsPage = async ({ params }: ProductPageProps) => {
           </div>
         </div>
 
-        {/* Action Column */}
-        <div className="p-4 mt-10 md:pr-2">
-          <Card>
-            <CardContent className="p-4">
-              <div className="mb-2 flex justify-between text-sm text-muted-foreground">
-                <div>Price</div>
-                <div>
-                  <ProductPrice
-                    value={Number(product.price)}
-                    className="text-xl font-semibold text-neutral-900 dark:text-white"
-                  />
-                </div>
+        {/* Columna de acciones */}
+        <div className="p-0">
+          <Card className="border">
+            <CardContent className="p-4 space-y-4">
+              <div className="flex justify-between items-center">
+                <div className="text-sm">Price</div>
+                <ProductPrice
+                  value={Number(product.price)}
+                  className="font-semibold"
+                />
               </div>
 
-              <div className="mb-2 flex justify-between text-sm text-muted-foreground">
-                <div>Status</div>
+              <div className="flex justify-between items-center">
+                <div className="text-sm">Status</div>
                 {product.stock > 0 ? (
-                  <Badge
-                    variant="outline"
-                    className="border-black text-black dark:border-white dark:text-white"
-                  >
+                  <Badge variant="outline" className="text-green-600 border-green-600">
                     In Stock
                   </Badge>
                 ) : (
@@ -85,11 +82,9 @@ const ProductDetailsPage = async ({ params }: ProductPageProps) => {
               </div>
 
               {product.stock > 0 && (
-                <div className="mt-6">
-                  <Button className="w-full text-base font-semibold bg-black text-white hover:bg-neutral-800">
-                    Add To Cart
-                  </Button>
-                </div>
+                <Button className="w-full bg-black hover:bg-gray-800 h-10">
+                  Add To Cart
+                </Button>
               )}
             </CardContent>
           </Card>
