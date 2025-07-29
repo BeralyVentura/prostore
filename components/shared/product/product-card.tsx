@@ -23,23 +23,16 @@ const ProductCard = ({ product }: { product: Product }) => {
       <CardContent className="p-4 flex flex-col gap-2 flex-1">
         <div className="text-xs text-gray-500">{product.brand}</div>
         <Link href={`/product/${product.slug}`}>
-          <h2 className="text-sm font-medium min-h-[40px]">{product.name}</h2>
+          <h2 className="text-sm font-medium">{product.name}</h2>
         </Link>
+        <p className="text-sm">{product.rating} Stars</p>
 
-        {/* Rating + Precio / Out Of Stock en una sola línea, perfectamente alineados */}
-        <div className="flex justify-between items-center text-sm min-h-[28px]">
-          <div className="flex items-center gap-1">
-            <span>{product.rating}</span>
-            <span>Stars</span>
-          </div>
-
-          <div className="flex items-center leading-none">
-            {product.stock > 0 ? (
-              <ProductPrice value={Number(product.price)} />
-            ) : (
-              <span className="text-sm text-red-600 font-medium">Out Of Stock</span>
-            )}
-          </div>
+        {/* Sección inferior */}
+        <div className="flex justify-between items-center mt-auto">
+          <ProductPrice value={Number(product.price)}/>
+          {product.stock <= 0 && (
+            <p className="text-sm text-red-600 font-medium">Out Of Stock</p>
+          )}
         </div>
       </CardContent>
     </Card>
